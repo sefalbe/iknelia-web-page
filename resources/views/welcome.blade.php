@@ -156,7 +156,7 @@
                 <video autoplay muted loop id="myVideo">
                   <source src="images/video-bg.mp4" type="video/mp4">
                 </video>
-        
+                {{-- Bienvenido --}}
                 <div id="fullpage" class="fullpage-default">
         
                     <div class="section animated-row" data-section="slide01">
@@ -240,24 +240,26 @@
                                         <span>NUESTROS</span>
                                         <h2>PRODUCTOS</h2>
                                     </div>
+                                    
                                     <div class="gallery-section">
                                         <div class="gallery-list owl-carousel">
-
-                                            <div class="item animate" data-animate="fadeInUp">
-                                                <div class="portfolio-item">
-                                                    <div class="thumb">
-                                                        <img src="images/item-1.jpg" alt="">
-                                                    </div>
-                                                    <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                        <h4>Mangas</h4>
-                                                        <p>Mangas cónicas negras resistentes a cortes con brazalete 
-                                                            STAYz-UP™. 18 in de largo. </p>
+                                            @foreach ($productos as $item)
+                                                <div class="item animate" data-animate="fadeInUp">
+                                                    <div class="portfolio-item">
+                                                        <div class="thumb">
+                                                            <img src={{$item->url_imagen}} alt=""> {{--"images/item-1.jpg" --}}
+                                                        </div>
+                                                        <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                            <h4>{{$item->nombre}}</h4>
+                                                            <p>{{$item->descripcion}}</p>
+                                                            <p><strong class="text-secondary"> Tiempo de entrega:</strong>{{$item->tiempo_entrega}}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
+                                            @endforeach
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
