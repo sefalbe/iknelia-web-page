@@ -166,7 +166,7 @@
                             <div class="welcome-box">
                                 <span class="welcome-first animate" data-animate="fadeInUp">Hola, bienvenido a</span>
                                 <h1 class="welcome-title animate" data-animate="fadeInUp">Iknelia</h1>
-                                <h4 class="animate" data-animate="fadeInUp">Soluciones y Suministros Integrales para la Industria y Residencia</h4>
+                                <h4 class="animate" data-animate="fadeInUp">Soluciones Integrales para la Industria y Residencia</h4>
                                 <p class="animate" data-animate="fadeInUp">Desde nuestra fundación en 2021, nuestro enfoque ha sido brindar soporte que necesita nuestro cliente de manera 
                                                                             personal, ofreciendo soluciones y suministros integrales para la Industria y Residencia. Para ello valoramos, 
                                                                             entendemos y superamos las expectativas de nuestros cliente.</p>
