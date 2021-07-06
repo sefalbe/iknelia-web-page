@@ -21,3 +21,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'WelcomeController@index')->name('init');
+Route::get('/administracion', 'CargarProductosController@index')->name('carga');

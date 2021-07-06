@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
 
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" type="image/png" href="{{asset('images/favicon.jpeg')}}">
         <title>Iknelia</title>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
 
@@ -139,12 +142,11 @@
                                             <li data-menuanchor="slide02"><a href="#slide02">Nosotros</a></li>
                                             <li data-menuanchor="slide03"><a href="#slide03">Productos</a></li>
                                             <li data-menuanchor="slide04"><a href="#slide04">Contactanos</a></li>
-                                            <li data-menuanchor="slide05"><a href="#slide05">Registro</a></li>
-                                            <li><a href="{{-- route('login') --}}">Login</a></li>
+                                            {{--<li data-menuanchor="slide05"><a href="#slide05">Registro</a></li>--}}
+                                            <li><a href="{{route('login')}}">Login</a></li>
                                             {{--<li data-menuanchor="slide04"><a href="#slide04">Filosoria</a></li>
                                             <li data-menuanchor="slide05"><a href="#slide05">My Work</a></li>
                                             <li data-menuanchor="slide06"><a href="#slide06">Testimonials</a></li>--}}
-                                            
                                         </ul>
                                     </div>
                                 </nav>
@@ -222,7 +224,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <figure class="about-img animate" data-animate="fadeInUp"><img src="images/profile-girl.jpg" class="rounded" alt=""></figure>
+                                                <figure class="about-img animate" data-animate="fadeInUp"><img src="images/profile-girl.jpeg" class="rounded" alt=""></figure>
                                             </div>
                                         </div>
                                     </div>
@@ -244,7 +246,7 @@
                                     <div class="gallery-section">
                                         <div class="gallery-list owl-carousel">
                                             @foreach ($productos as $item)
-                                                <div class="item animate" data-animate="fadeInUp">
+                                                <div class="item animate text-secondary" data-animate="fadeInUp">
                                                     <div class="portfolio-item">
                                                         <div class="thumb">
                                                             <img src={{$item->url_imagen}} alt=""> {{--"images/item-1.jpg" --}}
@@ -299,7 +301,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--Registro--}}
+                    {{--Registro--}}{{--
                     <div class="section animated-row" data-section="slide05">
                         <div class="section-inner">
                             <div class="row justify-content-center">
@@ -365,7 +367,7 @@
                                                                         </button>
                                                                     </div>
                                                                 </div>    
-                                                                --}}
+                                                                --}}{{--
                                                         </form>
                                                     </div>
                                                 </div>
@@ -388,7 +390,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
         
                 <div id="social-icons">
