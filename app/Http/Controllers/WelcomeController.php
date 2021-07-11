@@ -9,7 +9,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $productos = product::select('*')->get();
+        $productos = product::select('*')->where('b_activo','=',1)->get();
         return view('welcome',['productos'=> $productos]);
     }
 }

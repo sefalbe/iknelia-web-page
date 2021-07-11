@@ -7,7 +7,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="icon" type="image/png" href="{{asset('images/favicon.jpeg')}}">
+        <link rel="icon" type="image/png" href="{{asset('images/favicon.jpg')}}">
         <title>Iknelia</title>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
 

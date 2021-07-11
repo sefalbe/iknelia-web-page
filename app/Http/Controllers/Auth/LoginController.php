@@ -32,7 +32,6 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
      * @return void
      */
     public function __construct()
@@ -46,11 +45,10 @@ class LoginController extends Controller
             'user' => 'required',
             'password' => 'required',
         ]);
-        
         if (Auth::attempt(['user' => $request->user, 'password' => $request->password])) {
             return redirect()->route('carga');
         }else {
-            return redirect()->route('login');
+            return redirect()->route('login')->with(['Mensaje'=>'Credenciales incorrectas intenta de nuevo!!']);
         }
     }
 }
