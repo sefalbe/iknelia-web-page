@@ -19,10 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'CargarProductosController@index')->name('home')->middleware('auth');
 Route::get('/', 'WelcomeController@index')->name('init');
+
 Route::get('/administracion', 'CargarProductosController@index')->name('carga')->middleware('auth');
+Route::post('/administracion/update', 'CargarProductosController@update')->name('update')->middleware('auth');
+Route::post('/administracion/insert', 'CargarProductosController@insert')->name('insert')->middleware('auth');
+Route::post('/administracion/delete', 'CargarProductosController@delete')->name('delete')->middleware('auth');
+
 Route::get('/cuenta', 'CargarProductosController@cuenta')->name('cuenta')->middleware('auth');
+
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:clear');
