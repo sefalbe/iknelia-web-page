@@ -249,7 +249,7 @@
                                                 <div class="item animate text-secondary" data-animate="fadeInUp">
                                                     <div class="portfolio-item">
                                                         <div class="thumb">
-                                                            <img src={{$item->url_imagen}} alt=""> {{--"images/item-1.jpg" --}}
+                                                            <img src={{asset('/storage/images/productos/'.$item->url_imagen)}} alt=""> {{--"images/item-1.jpg" --}}
                                                         </div>
                                                         <div class="thumb-inner animate" data-animate="fadeInUp">
                                                             <h4>{{$item->nombre}}</h4>

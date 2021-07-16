@@ -35,7 +35,7 @@
                     <td>{{$item->codigo}}</td>
                     <td>{{$item->UM}}</td>
                     <td>{{$item->tiempo_entrega}}</td>
-                    <td ROWSPAN=2><img src="{{$item->url_imagen}}" alt="" class="" style="width: 200px; height: 200px;"></td>
+                    <td ROWSPAN=2><img src="{{asset('/storage/images/productos/'.$item->url_imagen)}}" alt="" class="" style="width: 200px; height: 200px;"></td>
                 </tr>
                 <tr>
                     <td colspan="5"></td>
@@ -92,7 +92,7 @@
                 <div class="container" id="my-llenado-competencia">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 p-0 mb-2">
-                            <form class="form_wrapper" action="{{route('update')}}" method="POST" id="formEdit">
+                            <form class="form_wrapper" action="{{route('update')}}" enctype="multipart/form-data" method="POST" id="formEdit">
                                 @csrf
                                 <input id="id_producto_edit" type="number" name="id_producto"  value="" style="display: none;">
 
@@ -153,9 +153,30 @@
                                     </div>     
                                 </div>
 
+                                <div class="row my-1">
+                                        <div class="col-10">
+                                            <div class="input-group input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" title="competencia">Imagen</span>
+                                                </div>
+                                                <p id="Eimagen" class="text-center form-control form-control-md"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" class="btn btn-primary btn-sm mt-1" title="Editar imagen" 
+                                                        onclick=" document.getElementById('editarimagen').style.display= 'block';">
+                                                Editar 
+                                            </button>
+                                        </div>            
+                                </div>
+                                
+                                <div id="editarimagen" class="my-1" style="display: none;">
+                                    <input type="file" class="" id="customFile" name="url_imagen">
+                                </div>
+
                                 <div class="input-group input-group mb-2">
                                     <h6>Descripcion:</h6>
-                                    <textarea id="Edescripcion" value="" name="Edescripcion" rows="10" cols="70"></textarea>
+                                    <textarea id="Edescripcion" value="" name="Edescripcion" rows="5" cols="70"></textarea>
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
@@ -193,7 +214,7 @@
                 <div class="container" id="my-llenado-competencia">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 p-0 mb-2">
-                            <form class="form_wrapper" action="{{route('insert')}}" method="POST" id="formAdd">
+                            <form class="form_wrapper" action="{{route('insert')}}" enctype="multipart/form-data" method="POST" id="formAdd">
                                 @csrf
                                 <div class="input-group input-group mb-2">
                                     <div class="input-group-prepend">
@@ -249,10 +270,13 @@
                                     <div class="invalid-feedback">
                                     </div>     
                                 </div>
+                                <div class="my-1">
+                                    <input type="file" class="" id="customFile" name="url_imagen">
+                                </div>
 
                                 <div class="input-group input-group mb-2">
                                     <h6>Descripcion:</h6>
-                                    <textarea id="descripcion" value="" name="descripcion" rows="10" cols="70"></textarea>
+                                    <textarea id="descripcion" value="" name="descripcion" rows="5" cols="70"></textarea>
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
@@ -312,6 +336,7 @@
                     document.getElementById('Ecodigo').value = item.codigo;
                     document.getElementById('Eum').value = item.UM;
                     document.getElementById('Eentrega').value = item.tiempo_entrega;
+                    document.getElementById('Eimagen').innerHTML = item.url_imagen;
                     document.getElementById('Edescripcion').value = item.descripcion;
                 }
             });
