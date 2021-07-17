@@ -140,13 +140,14 @@
                                         <ul class="navigation-menu nav navbar-nav navbars" id="nav">
                                             <li data-menuanchor="slide01" class="active"><a href="#slide01">Inicio</a></li>
                                             <li data-menuanchor="slide02"><a href="#slide02">Nosotros</a></li>
-                                            <li data-menuanchor="slide03"><a href="#slide03">Productos</a></li>
-                                            <li data-menuanchor="slide04"><a href="#slide04">Contactanos</a></li>
-                                            {{--<li data-menuanchor="slide05"><a href="#slide05">Registro</a></li>--}}
+                                            <li data-menuanchor="slide03"><a href="#slide03">Soluciones Industriales</a></li>
+                                            <li data-menuanchor="slide04"><a href="#slide04">Soluciones Residenciales</a></li>
+                                            <li data-menuanchor="slide05"><a href="#slide05">Contactanos</a></li>
+                                            {{--<li data-menuanchor="slide06"><a href="#slide06">Registro</a></li>--}}
                                             <li><a href="{{route('login')}}">Login</a></li>
-                                            {{--<li data-menuanchor="slide04"><a href="#slide04">Filosoria</a></li>
-                                            <li data-menuanchor="slide05"><a href="#slide05">My Work</a></li>
-                                            <li data-menuanchor="slide06"><a href="#slide06">Testimonials</a></li>--}}
+                                            {{--<li data-menuanchor="slide05"><a href="#slide05">Filosoria</a></li>
+                                            <li data-menuanchor="slide06"><a href="#slide06">My Work</a></li>
+                                            <li data-menuanchor="slide07"><a href="#slide07">Testimonials</a></li>--}}
                                         </ul>
                                     </div>
                                 </nav>
@@ -166,10 +167,11 @@
                             <div class="welcome-box">
                                 <span class="welcome-first animate" data-animate="fadeInUp">Hola, bienvenido a</span>
                                 <h1 class="welcome-title animate" data-animate="fadeInUp">Iknelia</h1>
-                                <h4 class="animate" data-animate="fadeInUp">Soluciones Integrales para la Industria y Residencia</h4>
+                                <span class="welcome-first animate" data-animate="fadeInUp">"El que no vive para servir, no sirve para vivir"</span>
+                                <h4 class="animate bg-titulo" data-animate="fadeInUp">Soluciones Integrales para la Industria y Residencia</h4>
                                 <p class="animate" data-animate="fadeInUp">Desde nuestra fundación en 2021, nuestro enfoque ha sido brindar soporte que necesita nuestro cliente de manera 
-                                                                            personal, ofreciendo soluciones y suministros integrales para la Industria y Residencia. Para ello valoramos, 
-                                                                            entendemos y superamos las expectativas de nuestros cliente.</p>
+                                                                            personal, ofreciendo soluciones integrales para la Industria y Residencia. Para ello valoramos, 
+                                                                            entendemos y superamos las expectativas de nuestros clientes.</p>
                                 <div class="scroll-down next-section animate data-animate="fadeInUp""><img src="images/mouse-scroll.png" alt=""><span>Scroll</span></div>
                             </div>
                         </div>
@@ -185,7 +187,7 @@
                                                 <div class="about-contentbox">
                                                     <div class="animate" data-animate="fadeInUp">
                                                         <span>Nosotros</span>
-                                                        <h2>¿ Que nos define ?</h2>
+                                                        <h2 class="bg-titulo">¿ Que nos define ?</h2>
                                                         <p>En Iknelia tenemos dos prioridades: <strong>calidad</strong>  y <strong>servicio</strong>. Utilizamos nuestro conocimiento y experiencia 
                                                             para adelantarnos a las necesidades de nuestros clientes, lo que nos distingue de los demás. Iknelia se conforma de los 6 pilares. </p>
                                                     </div>
@@ -233,14 +235,48 @@
                         </div>
                     </div>
                     
-                    {{--Productos--}}
+                    {{--Soluciones Industriales--}}
                     <div class="section animated-row" data-section="slide03">
                         <div class="section-inner">
                             <div class="row justify-content-center">
                                 <div class="col-md-8 wide-col-laptop">
                                     <div class="title-block animate" data-animate="fadeInUp">
-                                        <span>NUESTROS</span>
-                                        <h2>PRODUCTOS</h2>
+                                        <span>SOLUCIONES</span>
+                                        <h2 class="bg-titulo">INDUSTRIALES</h2>
+                                    </div>
+                                    
+                                    <div class="gallery-section">
+                                        <div class="gallery-list owl-carousel">
+                                            @foreach ($productos as $item)
+                                                <div class="item animate text-secondary" data-animate="fadeInUp">
+                                                    <div class="portfolio-item">
+                                                        <div class="thumb">
+                                                            <img src={{asset('/storage/images/productos/'.$item->url_imagen)}} alt=""> {{--"images/item-1.jpg" --}}
+                                                        </div>
+                                                        <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                            <h4>{{$item->nombre}}</h4>
+                                                            <p>{{$item->descripcion}}</p>
+                                                            <p><strong class="text-secondary"> Tiempo de entrega:</strong>{{$item->tiempo_entrega}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{--Soluciones Residenciales--}}
+                    <div class="section animated-row" data-section="slide03">
+                        <div class="section-inner">
+                            <div class="row justify-content-center">
+                                <div class="col-md-8 wide-col-laptop">
+                                    <div class="title-block animate" data-animate="fadeInUp">
+                                        <span>SOLUCIONES</span>
+                                        <h2 class="bg-titulo">RESIDENCIALES</h2>
                                     </div>
                                     
                                     <div class="gallery-section">
@@ -268,12 +304,12 @@
                     </div>
         
                     {{--Contactanos--}}
-                    <div class="section animated-row" data-section="slide04">
+                    <div class="section animated-row" data-section="slide05">
                         <div class="section-inner">
                             <div class="row justify-content-center">
                                 <div class="col-md-7 wide-col-laptop">
                                     <div class="title-block animate" data-animate="fadeInUp">
-                                        <h2>Contáctanos</h2>
+                                        <h2 class="bg-titulo">Contáctanos</h2>
                                     </div>
                                     <div class="contact-section">
                                         <div class="row">
@@ -302,7 +338,7 @@
                         </div>
                     </div>
                     {{--Registro--}}{{--
-                    <div class="section animated-row" data-section="slide05">
+                    <div class="section animated-row" data-section="slide06">
                         <div class="section-inner">
                             <div class="row justify-content-center">
                                 <div class="col-md-7 wide-col-laptop">
@@ -396,7 +432,7 @@
                 <div id="social-icons">
                     <div class="text-right">
                         <ul class="social-icons">
-                            <li><a href="https://www.facebook.com/IkneliaSolucionesIndustriales" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.facebook.com/IkneliaSolucionesIntegrales" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="https://api.whatsapp.com/send?phone=4421879448" title="Whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                         </ul>
                     </div>
