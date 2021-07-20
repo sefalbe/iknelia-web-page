@@ -9,7 +9,12 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $productos = product::select('*')->where('b_activo','=',1)->get();
-        return view('welcome',['productos'=> $productos]);
+        $industriales = product::select('*')
+                            ->join('tipo_products','tipo_products.id_tipo','=','products.id_tipo')
+                            ->where('id_cat','=',1)->where('b_activo','=',1)->get();
+        $residenciales = product::select('*')
+                            ->join('tipo_products','tipo_products.id_tipo','=','products.id_tipo')
+                            ->where('id_cat','=',2)->where('b_activo','=',1)->get();
+        return view('welcome',['residenciales'=>$residenciales, 'industriales' => $industriales]);
     }
 }

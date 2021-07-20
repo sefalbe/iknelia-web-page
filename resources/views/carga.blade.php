@@ -19,9 +19,11 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Descripcion</th>
-                <th scope="col">Codigo</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Categoria</th>
+                {{--<th scope="col">Codigo</th>
                 <th scope="col">UM</th>
-                <th scope="col">Entrega</th>
+                <th scope="col">Entrega</th>--}}
                 <th scope="col">Img</th>
               </tr>
             </thead>
@@ -32,13 +34,15 @@
                     <td>{{$item->nombre}}</td>
                     <td>{{$item->marca}}</td>
                     <td>{{$item->descripcion}}</td>
-                    <td>{{$item->codigo}}</td>
-                    <td>{{$item->UM}}</td>
-                    <td>{{$item->tiempo_entrega}}</td>
+                    <td>{{$item->nombrep}}</td>
+                    <td>{{$item->nombrec}}</td>
+                    
                     <td ROWSPAN=2><img src="{{asset('/storage/images/productos/'.$item->url_imagen)}}" alt="" class="" style="width: 200px; height: 200px;"></td>
                 </tr>
                 <tr>
-                    <td colspan="5"></td>
+                    <td colspan="2">Codigo: {{$item->codigo}}</td>
+                    <td colspan="1">UM: {{$item->UM}}</td>
+                    <td colspan="1">Entrega: {{$item->tiempo_entrega}}</td>
                     <td colspan="2">
                         <div class="row">
                             <button class="btn btn-primary btn-block mx-2" onclick="showUpdate({{$item->id_producto}})">editar</button> 
@@ -152,6 +156,27 @@
                                     <div class="invalid-feedback">
                                     </div>     
                                 </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text"  for="eid_tipo">Tipo</label>
+                                    </div>
+                                    <select class="custom-select" name="id_tipo" id="eid_tipo">
+                                      @foreach ($tipo_product as $item)
+                                        <option value="{{$item->id_tipo}}">{{$item->nombrep}}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text" for="eid_cat">Categoria</label>
+                                    </div>
+                                    <select class="custom-select" name="id_cat" id="eid_cat">
+                                        @foreach ($categoria as $item)
+                                            <option value="{{$item->id_cat}}">{{$item->nombrec}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <div class="row my-1">
                                         <div class="col-10">
@@ -180,8 +205,6 @@
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
-
-                                
 
                                 <div class="text-right mt-3">
                                     <div class="col-lg-12 p-0 ">
@@ -270,6 +293,29 @@
                                     <div class="invalid-feedback">
                                     </div>     
                                 </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text"  for="inputGroupSelect01">Tipo</label>
+                                    </div>
+                                    <select class="custom-select" name="id_tipo" id="inputGroupSelect01">
+                                      @foreach ($tipo_product as $item)
+                                        <option value="{{$item->id_tipo}}">{{$item->nombrep}}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text" for="inputGroupSelect02">Categoria</label>
+                                    </div>
+                                    <select class="custom-select" name="id_cat" id="inputGroupSelect02">
+                                        @foreach ($categoria as $item)
+                                            <option value="{{$item->id_cat}}">{{$item->nombrec}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="my-1">
                                     <input type="file" class="" id="customFile" name="url_imagen">
                                 </div>
@@ -337,6 +383,8 @@
                     document.getElementById('Eum').value = item.UM;
                     document.getElementById('Eentrega').value = item.tiempo_entrega;
                     document.getElementById('Eimagen').innerHTML = item.url_imagen;
+                    document.getElementById('eid_tipo').value = item.id_tipo;
+                    document.getElementById('eid_cat').value = item.id_cat;
                     document.getElementById('Edescripcion').value = item.descripcion;
                 }
             });

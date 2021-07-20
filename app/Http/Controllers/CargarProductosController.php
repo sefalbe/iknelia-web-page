@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\product;
+use App\categoria;
+use App\tipo_product;
 use Illuminate\Support\Facades\DB;
 
 class CargarProductosController extends Controller
 {
     public function index()
     {   
-        $productos = product::select('*')->where('b_activo','=',1)->orderBy('id_producto','DESC')->get();
-        return view('carga',['productos'=> $productos]);
+        $productos = product::select('*')
+                                    ->join('tipo_products','tipo_products.id_tipo','=','products.id_tipo')
+                                    ->join('categoria','categoria.id_cat','=','products.id_cat')
+                                    ->where('b_activo','=',1)->orderby('id_producto','DESC')->get();
+        $categoria = categoria::select('*')->get();
+        $tipo_product = tipo_product::select('*')->get();
+        return view('carga',['productos'=> $productos,'categoria'=> $categoria,'tipo_product'=> $tipo_product]);
     }
 
     public function cuenta()
@@ -44,7 +51,7 @@ class CargarProductosController extends Controller
             $path = $request->file('url_imagen')->storeAs($destino_path,$image_name);
             
             $producto['url_imagen'] =  $image_name;
-
+            
             try{
                 DB::beginTransaction();
                     product::where('id_producto','=', $producto['id_producto'])->update(['nombre' => $producto['Enombre']
@@ -53,7 +60,9 @@ class CargarProductosController extends Controller
                                                                                             ,'codigo' => $producto['Ecodigo']
                                                                                             ,'UM' => $producto['Eum']
                                                                                             ,'url_imagen' => $producto['url_imagen']
-                                                                                            ,'tiempo_entrega' => $producto['Eentrega']]);
+                                                                                            ,'tiempo_entrega' => $producto['Eentrega']
+                                                                                            ,'id_tipo' => $producto['id_tipo']
+                                                                                            ,'id_cat' => $producto['id_cat']]);
                 DB::commit();
                 return redirect()->action('CargarProductosController@index')->with(['Mensaje'=>'Producto guardado correctamente.','TipoMensaje'=>'bg-success']);
             }catch(\Exception $e){
@@ -69,7 +78,9 @@ class CargarProductosController extends Controller
                                                                                             ,'descripcion' => $producto['Edescripcion']
                                                                                             ,'codigo' => $producto['Ecodigo']
                                                                                             ,'UM' => $producto['Eum']
-                                                                                            ,'tiempo_entrega' => $producto['Eentrega']]);
+                                                                                            ,'tiempo_entrega' => $producto['Eentrega']
+                                                                                            ,'id_tipo' => $producto['id_tipo']
+                                                                                            ,'id_cat' => $producto['id_cat']]);
                 DB::commit();
                 return redirect()->action('CargarProductosController@index')->with(['Mensaje'=>'Producto guardado correctamente.','TipoMensaje'=>'bg-success']);
             }catch(\Exception $e){
@@ -84,13 +95,11 @@ class CargarProductosController extends Controller
     public function insert(Request $request)
     {
         $producto = request()->except('_token');
-
         if($request->hasFile('url_imagen')){
             $destino_path = 'public/images/productos';
             $image = $request->file('url_imagen');
             $image_name = $image->getClientOriginalName();
-            $path = $request->file('url_imagen')->storeAs($destino_path,$image_name);
-            
+            $path = $request->file('url_imagen')->storeAs($destino_path,$image_name);            
             $producto['url_imagen'] =  $image_name;
         }
         
