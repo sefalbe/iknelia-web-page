@@ -130,28 +130,37 @@
                 <header id="header">
                     <div class="container-fluid">
                         <div class="navbar">
-                            <a href="#" id="logo" title="Elegance by TemplateMo">
-                                Iknelia
-                            </a>
-                            <div class="navigation-row">
-                                <nav id="navigation">
-                                    <button type="button" class="navbar-toggle"> <i class="fa fa-bars"></i> </button>
-                                    <div class="nav-box navbar-collapse">
-                                        <ul class="navigation-menu nav navbar-nav navbars" id="nav">
-                                            <li data-menuanchor="slide01" class="active"><a href="#slide01">Inicio</a></li>
-                                            <li data-menuanchor="slide02"><a href="#slide02">Nosotros</a></li>
-                                            <li data-menuanchor="slide03"><a href="#slide03">Soluciones Industriales</a></li>
-                                            <li data-menuanchor="slide04"><a href="#slide04">Soluciones Residenciales</a></li>
-                                            <li data-menuanchor="slide05"><a href="#slide05">Contactanos</a></li>
-                                            {{--<li data-menuanchor="slide06"><a href="#slide06">Registro</a></li>--}}
-                                            <li><a href="{{route('login')}}">Login</a></li>
-                                            {{--<li data-menuanchor="slide05"><a href="#slide05">Filosoria</a></li>
-                                            <li data-menuanchor="slide06"><a href="#slide06">My Work</a></li>
-                                            <li data-menuanchor="slide07"><a href="#slide07">Testimonials</a></li>--}}
-                                        </ul>
+                            <div class="row">
+                                <div class="col-2">
+                                    <a href="{{route('init')}}" id="logo" title="Elegance by TemplateMo" class="">
+                                        {{--Iknelia--}}
+                                        <img src="{{asset('images/logo-iknelia_b.png')}}" class="img-fluid" style="max-width: 60%; height: auto;" alt="Responsive image"> 
+                                    </a>
+                                </div>
+                                <div class="col-10">
+                                    <div class="navigation-row navbar-text">
+                                        <nav id="navigation">
+                                            <button type="button" class="navbar-toggle"> <i class="fa fa-bars"></i> </button>
+                                            <div class="nav-box navbar-collapse">
+                                                <ul class="navigation-menu nav navbar-nav navbars" id="nav">
+                                                    <li data-menuanchor="slide01" class="active"><a href="#slide01">Inicio</a></li>
+                                                    <li data-menuanchor="slide02"><a href="#slide02">Nosotros</a></li>
+                                                    <li data-menuanchor="slide03"><a href="#slide03">Soluciones Industriales</a></li>
+                                                    <li data-menuanchor="slide04"><a href="#slide04">Soluciones Residenciales</a></li>
+                                                    <li data-menuanchor="slide05"><a href="#slide05">Contactanos</a></li>
+                                                    {{--<li data-menuanchor="slide06"><a href="#slide06">Registro</a></li>--}}
+                                                    <li><a href="{{route('login')}}">Login</a></li>
+                                                    {{--<li data-menuanchor="slide05"><a href="#slide05">Filosoria</a></li>
+                                                    <li data-menuanchor="slide06"><a href="#slide06">My Work</a></li>
+                                                    <li data-menuanchor="slide07"><a href="#slide07">Testimonials</a></li>--}}
+                                                </ul>
+                                            </div>
+                                        </nav>
                                     </div>
-                                </nav>
+                                </div>
                             </div>
+                            
+                            
                         </div>
                     </div>
                 </header>
@@ -166,7 +175,8 @@
                         <div class="section-inner">
                             <div class="welcome-box">
                                 <span class="welcome-first animate" data-animate="fadeInUp">Hola, bienvenido a</span>
-                                <h1 class="welcome-title animate" data-animate="fadeInUp">Iknelia</h1>
+                                
+                                <img src="{{asset('images/logo-iknelia_b.png')}}" class="img-fluid" style="max-width: 40%; height: auto;" alt="Responsive image">         
                                 <span class="welcome-first animate" data-animate="fadeInUp">"El que no vive para servir, no sirve para vivir"</span>
                                 <h4 class="animate bg-titulo" data-animate="fadeInUp">Soluciones Integrales para la Industria y Residencia</h4>
                                 <p class="animate" data-animate="fadeInUp">Desde nuestra fundación en 2021, nuestro enfoque ha sido brindar soporte que necesita nuestro cliente de manera 
