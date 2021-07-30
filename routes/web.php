@@ -26,6 +26,7 @@ Route::get('/administracion', 'CargarProductosController@index')->name('carga')-
 Route::post('/administracion/update', 'CargarProductosController@update')->name('update')->middleware('auth')->middleware('cors');
 Route::post('/administracion/insert', 'CargarProductosController@insert')->name('insert')->middleware('auth')->middleware('cors');
 Route::post('/administracion/delete', 'CargarProductosController@delete')->name('delete')->middleware('auth')->middleware('cors');
+Route::get('/send', 'CargarProductosController@sendMail')->name('sendEmail');
 
 Route::get('/cuenta', 'CargarProductosController@cuenta')->name('cuenta')->middleware('auth');
 

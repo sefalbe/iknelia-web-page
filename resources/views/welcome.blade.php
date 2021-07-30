@@ -84,39 +84,71 @@
 
     </head>
     <body>
-        {{--<div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        
+    {{--Modal Mensaje--}}
+    <div class="modal fade" id="modalMns" tabindex="-1" role="dialog"aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                {{--<div class="modal-header">
+                    <h5 class="modal-title">Titulo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>--}}
+                <div class="modal-body preloader-modal">
+                    <div class="container" >
+                        <div class="row">
+                            <div class="col-lg-12 p-0">
+                                <form action="{{--route('agregar_competencia',['id_encuesta' => $id_encuesta])--}}" method="POST" >
+                                    @csrf
+                                    <button type="button" class="text-white close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h5 class="">Titulo</h5>
+                                    <div class="form-group text-left mb-0">
+                                        <label class="mb-0" for="nombre">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" placeholder="Nombres">
+                                    </div>
+                                    <div class="form-group text-left mb-0">
+                                        <label class="mb-0" for="apellido">Apellido</label>
+                                        <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                                    </div>
+                                    <div class="form-group text-left mb-0">
+                                        <label class="mb-0" for="empresa">Empresa</label>
+                                        <input type="text" class="form-control" id="empresa" placeholder="Nombre de la empresa">
+                                    </div>
+                                    <div class="form-group text-left mb-0">
+                                        <label class="mb-0" for="correo">Correo</label>
+                                        <input type="email" class="form-control" id="correo" placeholder="Correo">
+                                    </div>
+                                    <div class="form-group text-left mb-0">
+                                        <label class="mb-0" for="telefono">Teléfono</label> {{--opcional --}}
+                                        <input type="tel" class="form-control" id="telefono" placeholder="Teléfono ">
+                                        {{--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--}}
+                                    </div>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-
-            {{--<div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                                    <div class="text-right mt-2">
+                                        <div class="col-lg-12 p-0 ">
+                                            <button type="button" class="btn-modal mx-1" id="cerrarModalAddCompetencia" title="regresar" data-dismiss="modal" aria-label="Close">
+                                                Cancelar  
+                                            </button>
+                                            <button type="submit" class="btn-modal my-0" title="Guardar Competencias" onclick="{{--activarAnimation();--}}">
+                                                Guardar 
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>--}}
+        </div>
+    </div>
+
+
+
         <div>
             <div id="video">
                 <div class="preloader">
@@ -467,11 +499,26 @@
         
             <script src="{{ asset('js/custom.js')}}"></script>
 
+            {{--Script al inicializar y cargar el documento --}}
+            <script>
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    showModalMns();
+                });
+            </script>
+
+            {{--Script para abrir modal  Mensaje libro--}}
+            <script>
+                function showModalMns(){
+                    $('#modalMns').modal('show');
+                }
+            </script>
+
+            {{--Script para redireigir al registro--}}
             <script>
                 function registrar(){
                     window.location.href = "{{ route('register') }}";
                 }
-            </script>
+            </script> 
         </div>
     </body>
 </html>

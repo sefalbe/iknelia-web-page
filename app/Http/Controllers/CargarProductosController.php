@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Mail;
 use Illuminate\Http\Request;
 use App\product;
 use App\categoria;
@@ -112,5 +112,20 @@ class CargarProductosController extends Controller
             DB::rollback();
             return redirect()->action('CargarProductosController@index')->with('Mensaje','Error :(  intentalo mas tarde..')->with('TipoMensaje','bg-danger');
         }
+    }
+
+    public function sendMail(){
+
+        $email = 'isc.efrenchavez@gmail.com';
+
+		$subject = "Prueba";
+        $data = array('name'=>"Virat Gandhi");
+        Mail::send('mail', $data, function ($mail) use ($email,$subject)/*($pdf,$email,$subject)*/ {
+            $mail->from('contacto@iknelia-soluciones.com', 'IKNELIA');
+            $mail->to($email)->subject($subject);
+            //$mail->attachData($pdf->output(), 'reconocimiento_360.pdf');
+        });
+
+        return "Enviado";
     }
 }
