@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'CargarProductosController@index')->name('home')->middleware('auth')->middleware('cors');
 Route::get('/', 'WelcomeController@index')->name('init')->middleware('cors');
+Route::post('/registro', 'WelcomeController@registro')->name('registro');
 
 Route::get('/administracion', 'CargarProductosController@index')->name('carga')->middleware('auth')->middleware('cors');
 Route::post('/administracion/update', 'CargarProductosController@update')->name('update')->middleware('auth')->middleware('cors');
@@ -37,3 +38,8 @@ Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:cache');
     return 'DONE'; //Return anything
 });
+
+/*Route::get('/storage-link', function() {
+    Artisan::call('storage:link');
+    return 'DONE S-L';
+});*/
