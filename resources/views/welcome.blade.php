@@ -24,100 +24,92 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css')}}">
 
 
-        <!-- Fonts -->
-        {{--<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">--}}
-
-        {{--<!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>--}}
-
-
     </head>
     <body>
-        {{--<div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-
-            {{--<div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+    {{--Modal Correo--}}
+    <div class="modal fade bd-example-modal-lg" id="modalCorreo" tabindex="-1" role="document" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-success">
+                <div class="row m-3">
+                    <div class="col-11">
+                        <h5 class="text-white">{{Session::get('Mensaje')}}</h5>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>--}}
-        <div>
+        </div>
+    </div>    
+
+    {{--Modal Mensaje--}}
+    <div class="modal fade" id="modalMns" tabindex="-1" role="dialog"aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body preloader-modal">
+                    <div class="container" >
+                        <div class="row">
+                            <div class="col-lg-12 p-0">
+                                <form action="{{route('registro')}}" method="POST" >
+                                    @csrf
+                                    <button type="button" class="text-white close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button> 
+                                    <h3>Obten un 10% de descuento en tu primera compra.</h3>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 text-left mb-0">
+                                            <label class="mb-0" for="nombre">Nombre *</label>
+                                            <input type="text" name="nombre" class="form-control" placeholder="Nombres" required>
+                                        </div>
+                                        <div class="form-group col-md-6 text-left mb-0">
+                                            <label class="mb-0" for="apellido">Apellido *</label>
+                                            <input type="text" name="apellido" class="form-control" placeholder="Apellido" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 text-left mb-0">
+                                            <label class="mb-0" for="empresa">Empresa *</label>
+                                            <input type="text" name="empresa" class="form-control" placeholder="Nombre de la empresa" required>
+                                        </div>
+                                        <div class="form-group col-md-6 text-left mb-0">
+                                            <label class="mb-0" for="correo">Correo *</label>
+                                            <input type="email" name="correo" class="form-control" placeholder="Correo" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 text-left mb-2">
+                                            <label class="mb-0" for="telefono">Teléfono </label> {{--opcional --}}
+                                            <input type="tel" name="telefono" class="form-control" placeholder="Teléfono (opcional)">
+                                        </div>
+                                    </div> 
+                                    <p>
+                                        Despues de tu registro, recibe el libro <strong>"Rethinking Hand Safety"</strong> digital totalmente gratis que 
+                                        te ayudará a mejorar los indicadores de incidentes relacionados con las manos y las mejores promociones
+                                        sobre nuestras soluciones para el hogar y la industria. 
+                                    </p>
+                                    <div class="text-right mt-2">
+                                        <div class="col-lg-12 p-0 ">
+                                            <button type="button" class="btn-modal mx-1" id="cerrarModalAddCompetencia" title="regresar" data-dismiss="modal" aria-label="Close">
+                                                Cancelar  
+                                            </button>
+                                            <button class="g-recaptcha btn-modal my-0" 
+                                                    {{--data-sitekey="reCAPTCHA_site_key"
+                                                    data-callback='onSubmit' 
+                                                    data-action='submit'--}} type="submit">Registrar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
             <div id="video">
                 <div class="preloader">
                     <div class="preloader-bounce">
@@ -467,12 +459,47 @@
         
             <script src="{{ asset('js/custom.js')}}"></script>
 
+            {{--<script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>--}}
+
+            {{--Script al inicializar y cargar el documento --}}
+            <script>
+                document.addEventListener("DOMContentLoaded", function(event) { 
+                    @if(Session::has('Mensaje'))
+                        showModalCorreo(); 
+                    @else
+                        showModalMns();
+                    @endif
+                });
+            </script>
+
+            {{--Script para abrir modal  Mensaje libro--}}
+            <script>
+                function showModalMns(){
+                    $('#modalMns').modal('show');
+                }
+            </script>
+            {{--Script para abrir modal  Mensaje libro--}}
+            <script>
+                function showModalCorreo(){
+                    $('#modalCorreo').modal('show');
+                }
+            </script>
+
+            {{--Script para redireigir al registro--}}
             <script>
                 function registrar(){
                     window.location.href = "{{ route('register') }}";
                 }
-            </script>
-        </div>
+            </script> 
+
+            {{--RECAPTCHA --}}
+            <script>
+                function onSubmit(token) {
+                  document.getElementById("demo-form").submit();
+                }
+              </script>
+    </div>
+
     </body>
 </html>
 
