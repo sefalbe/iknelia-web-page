@@ -20,72 +20,57 @@ class WelcomeController extends Controller
         return view('welcome',['residenciales'=>$residenciales, 'industriales' => $industriales]);
     }
     public function registro(Request $request)
-    {
+    {   
         $usuario = request()->except('_token');
-        $code = rand();
-        Arr::set($datosEncuesta,'code',$code);
+        $code = rand(1000,9999);
+        Arr::set($usuario,'code',$code);
 
         customer::insert($usuario);
-
-        //recipient
-        $to = $usuario['correo'];
-
-        //sender
-        $from = 'leonel_rodriguez@iknelia-soluciones.com';
-        $fromName = 'www.iknelia-soluciones.com';
-
-        //email subject
-        $subject = '10% Descuento IKNELIA'; 
-
-        //attachment file path
-        $file = "../../../public/doc/Rethinking_Hand_Safety-Manuscript.pdf";
-
-        //email body content
-        $htmlContent = '<h4>Codigo de descuento: <strong>'.$code.'</strong></h4>
-            <p>Queremos darte un trato personalizado, por favor comunicate con nostros al 442 187 9448 o por correo 
-            electronico a leonel_rodriguez@iknelia-soluciones.com </p>';
-
-        //header for sender info
-        $headers = "From: $fromName"." <".$from.">";
-
-        //boundary 
-        $semi_rand = md5(time()); 
-        $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
-
-        //headers for attachment 
-        $headers .='nMIME-Version: 1.0n'.'Content-Type: multipart/mixed;n'.' boundary="{$mime_boundary}"'; 
-
-        //multipart boundary 
-        $message = '--{$mime_boundary}n'.' Content-Type: text/html; charset="UTF-8"n'.
-        ' Content-Transfer-Encoding: 7bitnn'.$htmlContent.'nn'; 
-
-        //preparing attachment
-        if(!empty($file) > 0){
-            if(is_file($file)){
-                $message .= "--{$mime_boundary}n";
-                $fp =    @fopen($file,"rb");
-                $data =  @fread($fp,filesize($file));
-
-                @fclose($fp);
-                $data = chunk_split(base64_encode($data));
-                $message .= 'Content-Type: application/octet-stream; name=""'.basename($file).'n'. 
-                'Content-Description:' .basename($files[$i]).'n'.
-                'Content-Disposition: attachment;n'.'filename='.basename($file).'; size='.filesize($file).';n'. 
-                'Content-Transfer-Encoding: base64nn' . $data . 'nn';
-            }
-        }else{
-            dd("error del archivo");
-        }
-
-        $message .= "--{$mime_boundary}--";
-        $returnpath = "-f" . $from;
-
-        //send email
-        $mail = @mail($to, $subject, $message, $headers, $returnpath); 
-
-        //email sending status
+        
+        $filename = "Rethinking_Hand_Safety-Manuscript.pdf";
+        $path = storage_path()."/app/";
+        
+        
+        $file      = $path . $filename;
+        $file_size = filesize($file);
+        $handle    = fopen($file, "r");
+        $content   = fread($handle, $file_size);
+        fclose($handle);
+        
+        $content = chunk_split(base64_encode($content));
+        $uid     = md5(uniqid(time()));
+        $name    = basename($file);
+        
+        $eol     = PHP_EOL;
+        $subject = "Iknelia 10%-Descuento";
+        $message = '<h1>Codigo de descuento: <strong>'.$code.'</strong></h1>
+            <h3>Queremos darte un trato personalizado, por favor comunicate con nostros al 442 187 9448 o por correo 
+            electronico a leonel_rodriguez@iknelia-soluciones.com </h3>';
+        
+        $from_name = "Iknelia-soluciones";
+        $from_mail = "leonel_rodriguez@iknelia-soluciones.com";
+        $replyto   = $usuario['correo']."";
+        $mailto    = $usuario['correo']."";
+        $header    = "From: " . $from_name . " <" . $from_mail . ">\n";
+        $header .= "Reply-To: " . $replyto . "\n";
+        $header .= "MIME-Version: 1.0\n";
+        $header .= "Content-Type: multipart/mixed; boundary=\"" . $uid . "\"\n\n";
+        $emessage = "--" . $uid . "\n";
+        $emessage .= "Content-type:text/html; charset=iso-8859-1\n";
+        $emessage .= "Content-Transfer-Encoding: 7bit\n\n";
+        $emessage .= $message . "\n\n";
+        $emessage .= "--" . $uid . "\n";
+        $emessage .= "Content-Type: application/octet-stream; name=\"" . $filename . "\"\n"; // use different content types here
+        $emessage .= "Content-Transfer-Encoding: base64\n";
+        $emessage .= "Content-Disposition: attachment; filename=\"" . $filename . "\"\n\n";
+        $emessage .= $content . "\n\n";
+        $emessage .= "--" . $uid . "--";
+        
+        $mail = mail($mailto, $subject, $emessage, $header);
+        
         $mns = $mail?'Enviamos tu libro al correo '.$usuario['correo']: 'Mail sending failed. :(';
         
         return redirect()->action('WelcomeController@index')->with(['Mensaje'=>$mns]);
+        
     }
 }
